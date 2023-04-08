@@ -2,11 +2,11 @@
 
 Paperbot is a simple command-line tool that answers questions by retrieving relevant sources from a collection of PDFs and (hopefully) citing them in its answer. While vanilla LLMs are very good at providing plausible text, they sometimes hallucinate ciations. In academic contexts this can be very frustrating or problematic.
 
-We use [langchain](https://python.langchain.com/en/latest/index.html) to retrieve actual sources and a prompt that encouraging the LLM to cite these sources. You create the source collection yourself from a directory of PDFs, so you can choose which papers the model can refer to. You can also return the raw sources to see the information the model used to construct its response.
+Paperbot uses [langchain](https://python.langchain.com/en/latest/index.html) to retrieve actual sources and a prompt that encourages the LLM to cite these sources. You create the source collection yourself from a directory of PDFs, so you can choose which papers the model can refer to. You can also return the raw sources to see the information the model used to construct its response.
 
-You can choose between Hugging Face embeddings (default) or OpenAI ada-text-002 embeddings (which could be costly for large collections). By default the QA LLM is gpt-3.5-turbo, but you can specify any openai model.
+You can choose between Hugging Face embeddings (default) or OpenAI ada-text-002 embeddings (which could be costly for large collections). By default the QA LLM is gpt-3.5-turbo, but you can specify any OpenAI model.
 
-You have to supply your own OPENAI_API_KEY. With the default settings it should cost around $0.005 per query. Most of this is for the model to process the retrieved source text, so increasing `chunk_size` and `n_sources` could increase cost significantly.
+You have to supply your own `OPENAI_API_KEY`. With the default settings it should cost around $0.005 per query. Most of this is for the model to process the retrieved source text, so increasing `chunk_size` and `n_sources` could increase cost significantly.
 
 This was just a fun project to try out using langchain, but it returns pretty good results a lot of the time! I have some ideas below to try to improve it but please do reach out or feel free to contribute if you have others.
 
@@ -54,7 +54,11 @@ Arguments:
 Ask a question that the model will answer with info from the index.
 
 ```bash
-$ python paperbot.py query_model --question "What is Theory of Mind?" --index_name my_index
+python paperbot.py query_model --question "What is Theory of Mind?" --index_name my_index
+```
+
+Output:
+```bash
 Theory of Mind (ToM) refers to the cognitive ability to attribute mental states to others and predict their behavior based on these mental states, such as intentions, beliefs, desires, and other psychological phenomena (Premack & Woodruff, 1978; van de Pol, 2015, p. 15). This ability allows humans to navigate and understand social situations ranging from simple everyday interactions to complex negotiations (Sap et al., 2022, p. 2). ToM is essential for explaining intentional and unintentional behaviors and making inferences about the causal relationships between mental states and actions (van de Pol, 2015, p. 15).
 
 References:
